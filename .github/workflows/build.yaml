@@ -1,0 +1,32 @@
+on:
+  push:
+    tags:
+      - '*'
+
+name: Build jx command
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.11.5'
+
+      - name: Build jx
+        run: make linux
+
+      - run: |
+          cd build/linux
+          tar cvzf jx-linux-amd64.tar.gz jx
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: jx-linux-amd64.tar.gz
+          path: build/linux/jx-linux-amd64.tar.gz
