@@ -11,7 +11,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-const DEFAULT_APPS_REPOSITORY = "http://chartmuseum.jenkins-x.io"
+const DEFAULT_APPS_REPOSITORY = "https://jenkins-x-charts.github.io/v2"
 
 func EnsureEnvironmentNamespaceSetup(kubeClient kubernetes.Interface, jxClient versioned.Interface, env *v1.Environment, ns string) error {
 	// lets create the namespace if we are on the same cluster
